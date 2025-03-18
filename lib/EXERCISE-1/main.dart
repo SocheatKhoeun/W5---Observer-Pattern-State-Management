@@ -9,7 +9,9 @@ void main() {
   service.addListener(logger); 
 
   service.setPreference(RidePreference(name: 'Socheat')); 
+  service.removeListener(logger);
   service.setPreference(RidePreference(name: 'Hello')); 
+  // service.removeListener(logger);
 
 }
 
