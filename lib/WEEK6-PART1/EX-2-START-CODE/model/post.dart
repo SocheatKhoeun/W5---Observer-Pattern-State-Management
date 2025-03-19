@@ -1,4 +1,4 @@
-import 'package:observer_w5/WEEK6-PART1/EX-2-START-CODE/dto/post_dto.dart';
+import '../dto/post_dto.dart';
 
 class Post {
   final int id;

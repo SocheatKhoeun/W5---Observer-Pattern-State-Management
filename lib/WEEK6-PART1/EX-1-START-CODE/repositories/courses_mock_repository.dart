@@ -3,10 +3,8 @@ import 'courses_repository.dart';
 
 class CoursesMockRepository implements CoursesRepository {
   final List<Course> _courses = [
-    Course(name: 'HTML'),
     Course(name: 'JAVA'),
     Course(name: 'Flutter'),
-    Course(name: 'Python'),
   ];
 
   @override

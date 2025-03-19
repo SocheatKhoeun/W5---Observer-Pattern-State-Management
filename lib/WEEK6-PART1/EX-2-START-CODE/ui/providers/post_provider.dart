@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:observer_w5/WEEK6-PART1/EX-2-START-CODE/model/post.dart';
-import 'package:observer_w5/WEEK6-PART1/EX-2-START-CODE/repository/post_repository.dart';
+import '../../model/post.dart';
+import '../../repository/post_repository.dart';
 
 
 enum AsyncValueState { loading, error, success }

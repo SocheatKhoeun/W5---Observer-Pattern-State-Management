@@ -11,13 +11,14 @@ class CoursesProvider extends ChangeNotifier {
     return _repository.getCourses();
   }
   
-  Course getCourseFor(String courseId) {
+  // Get Course by ID
+  Course getCourse(String courseId) {
     final courses = _repository.getCourses();
     return courses.firstWhere((course) => course.name == courseId);
   }
   
   void addScore(String courseId, CourseScore score) {
-    final course = getCourseFor(courseId);
+    final course = getCourse(courseId);
     _repository.addScore(course, score);
     notifyListeners();
   }

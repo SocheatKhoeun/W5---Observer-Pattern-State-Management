@@ -12,7 +12,7 @@ class CourseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final coursesProvider = Provider.of<CoursesProvider>(context);
-    final course = coursesProvider.getCourseFor(courseId);
+    final course = coursesProvider.getCourse(courseId);
     final scores = course.scores;
 
   void addScore() async {
@@ -45,7 +45,6 @@ class CourseScreen extends StatelessWidget {
             ),
       );
     }
-
 
     return Scaffold(
       backgroundColor: Colors.white,

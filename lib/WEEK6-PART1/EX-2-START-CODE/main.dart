@@ -11,7 +11,8 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => PostsProvider(repository: postRepo),
-      child: const MaterialApp(debugShowCheckedModeBanner: false, home: PostsScreen()),
+      child: const MaterialApp(debugShowCheckedModeBanner: false,
+      home: PostsScreen()),
     ),
   );
 }
