@@ -1,64 +1,54 @@
 import 'package:flutter/material.dart';
+import '../../ui/providers/post_provider.dart';
 import 'package:provider/provider.dart';
 import '../../model/post.dart';
-import '../providers/async_value.dart';
-import '../providers/post_provider.dart';
 
-class PostScreen extends StatelessWidget {
-  const PostScreen({super.key});
+class PostsScreen extends StatelessWidget {
+  const PostsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get the post provider from the context
-    final postProvider = Provider.of<PostProvider>(context);
+    final postsProvider = Provider.of<PostsProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Posts'),
         actions: [
           IconButton(
-            // Fetch new posts when refresh button is tapped
-            onPressed: () => postProvider.fetchPost(45),
-            icon: const Icon(Icons.update),
+            onPressed: () => postsProvider.fetchPosts(),
+            icon: const Icon(Icons.refresh),
           ),
         ],
       ),
-      body: Center(child: _buildBody(postProvider)), // Display content based on the state
+      body: Center(child: _buildBody(postsProvider)),
     );
   }
 
-  Widget _buildBody(PostProvider postProvider) {
-    final postValue = postProvider.postValue;
+  Widget _buildBody(PostsProvider postsProvider) {
+    final postValue = postsProvider.postValue;
 
-    // If no data is available, prompt the user to refresh
     if (postValue == null) {
-      return const Text('Tap refresh to display posts');
+      return const Text('Tap refresh to load posts');
     }
 
-    // Handle different states of the post data
     switch (postValue.state) {
       case AsyncValueState.loading:
-        return const CircularProgressIndicator(); // Show a loading indicator
-
+        return const CircularProgressIndicator();
       case AsyncValueState.error:
-        return Text('Error: ${postValue.error}'); // Show an error message
-
+        return Text('Error: ${postValue.error}');
       case AsyncValueState.success:
         final posts = postValue.data!;
-        
-        // Show message if list is empty
-        if (posts.isEmpty) {
-          return const Text('No posts available'); 
-        }
-        return PostsList(posts: posts);
+        return posts.isEmpty
+            ? const Text('No posts available')
+            : PostsList(posts: posts);
     }
   }
 }
 
-// Widget to display a list of posts
 class PostsList extends StatelessWidget {
-  const PostsList({super.key, required this.posts});
-
   final List<Post> posts;
+
+  const PostsList({super.key, required this.posts});
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +61,10 @@ class PostsList extends StatelessWidget {
   }
 }
 
-// Widget to display a single post in a card format
 class PostCard extends StatelessWidget {
-  const PostCard({super.key, required this.post});
-
   final Post post;
+
+  const PostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
